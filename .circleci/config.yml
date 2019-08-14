@@ -1,21 +1,5 @@
 version: 2.0
 jobs:
-    package:
-        docker:
-            - image: circleci/openjdk:8-jdk
-        steps:
-            - checkout
-            - run:
-                name: Gradle Jar
-                command:
-                    gradle jar
-            - store_artifacts:
-                path: build/libs
-                destination: prefix\
-            - persist_to_workspace:
-                  root: build/libs
-                  paths:
-                      - .
     test:
         docker:
             - image: circleci/openjdk:8-jdk
@@ -27,6 +11,27 @@ jobs:
                       gradle test
             - store_test_results:
                   path: build/test-results
+            - persist_to_workspace:
+                root: .
+                paths:
+                    - .
+    package:
+        docker:
+            - image: circleci/openjdk:8-jdk
+        steps:
+            - attach_workspace:
+                at: .
+            - run:
+                name: Gradle Jar
+                command:
+                    gradle jar
+            - store_artifacts:
+                path: build/libs
+                destination: prefix\
+            - persist_to_workspace:
+                  root: build/libs
+                  paths:
+                      - .
 
 workflows:
     version: 2
