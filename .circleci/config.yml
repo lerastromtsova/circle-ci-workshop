@@ -32,19 +32,20 @@ jobs:
                   root: build/libs
                   paths:
                       - .
-    jobs:
-        dockerize:
-            machine: true
-            steps:
-                - checkout
-                # Login to docker
-                - run: docker login -u vstromtsova -p mutfyq-2nymsy-vIhvaw
 
-                # build the application image
-                - run: docker build -t vstromtsova/myapp:$CIRCLE_SHA1 .
+    dockerize:
+        machine: true
+        steps:
+            - attach_workspace:
+                  at: .
+            # Login to docker
+            - run: docker login -u vstromtsova -p mutfyq-2nymsy-vIhvaw
 
-                # deploy the image
-                - run: docker push vstromtsova/myapp:$CIRCLE_SHA1
+            # build the application image
+            - run: docker build -t vstromtsova/myapp:$CIRCLE_SHA1 .
+
+            # deploy the image
+            - run: docker push vstromtsova/myapp:$CIRCLE_SHA1
 
 workflows:
     version: 2
