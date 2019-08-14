@@ -55,4 +55,7 @@ workflows:
             - package:
                   requires:
                       - test
+            - dockerize:
+                  requires:
+                      - package
 
