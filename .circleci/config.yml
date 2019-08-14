@@ -13,7 +13,7 @@ jobs:
                 path: build/libs
                 destination: prefix\
             - persist_to_workspace:
-                  root: \prefix
+                  root: build/libs
                   paths:
                       - .
     test:
