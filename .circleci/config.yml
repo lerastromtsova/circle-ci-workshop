@@ -39,13 +39,13 @@ jobs:
             - attach_workspace:
                   at: .
             # Login to docker
-            - run: docker login -u vstromtsova -p mutfyq-2nymsy-vIhvaw
+            - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
             # build the application image
-            - run: docker build -t vstromtsova/myapp:$CIRCLE_SHA1 .
+            - run: docker build -t $DOCKER_USER/myapp:$CIRCLE_SHA1 .
 
             # deploy the image
-            - run: docker push vstromtsova/myapp:$CIRCLE_SHA1
+            - run: docker push $DOCKER_USER/myapp:$CIRCLE_SHA1
 
 workflows:
     version: 2
