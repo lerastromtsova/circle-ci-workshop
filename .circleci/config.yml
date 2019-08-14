@@ -4,6 +4,7 @@ jobs:
         docker:
             - image: circleci/openjdk:8-jdk
         steps:
+            - checkout
             - run:
                 name: Gradle Jar
                 command:
@@ -11,6 +12,10 @@ jobs:
             - store_artifacts:
                 path: build/libs
                 destination: prefix\
+            - persist_to_workspace:
+                  root: prefix 
+                  paths:
+                      - .
     test:
         docker:
             - image: circleci/openjdk:8-jdk
