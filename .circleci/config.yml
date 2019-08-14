@@ -37,7 +37,7 @@ jobs:
         machine: true
         steps:
             - attach_workspace:
-                  at: .
+                  at: build/libs
             # Login to docker
             - run: docker login -u vstromtsova -p mutfyq-2nymsy-vIhvaw
 
@@ -49,7 +49,7 @@ jobs:
 
 workflows:
     version: 2
-    two_job_flow:
+    test_build_dockerize:
         jobs:
             - test
             - package:
