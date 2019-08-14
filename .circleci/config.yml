@@ -37,7 +37,7 @@ jobs:
         machine: true
         steps:
             - attach_workspace:
-                  at: build/libs
+                  at: .
             # Login to docker
             - run: docker login -u vstromtsova -p mutfyq-2nymsy-vIhvaw
 
